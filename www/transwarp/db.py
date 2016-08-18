@@ -1,4 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # db.py
+
 __author__ = 'micrazy'
 
 '''
@@ -211,9 +214,9 @@ def with_connection(func):
 
     @functools.wraps(func)
     def _wrapper(*args, **kw):
-        logging.info('hahahahaha')
-        with connection():
-            return func(*args, **kw)
+        # logging.info('hahahahaha')
+            with connection():
+                return func(*args, **kw)
     return _wrapper
 
 
@@ -228,7 +231,7 @@ class _TransactionCtx(object):
         global _db_ctx
         self.should_close_conn = False
         if not _db_ctx.is_init():
-            # needs open a connection first:
+                # needs open a connection first:
             _db_ctx.init()
             self.should_close_conn = True
         _db_ctx.transactions = _db_ctx.transactions + 1
